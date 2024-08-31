@@ -1,0 +1,54 @@
+.main-image,.sup-image{
+    cursor: pointer;
+}
+
+
+
+.loading {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(109, 109, 109, 0);
+    justify-items: center;
+    align-items: center;
+    z-index: 999
+}
+
+.main {
+    min-height: 620px;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #0000;
+    border-right-color: #00ad0a;
+    position: relative;
+    animation: l24 1s infinite linear;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: inherit;
+    animation: inherit;
+    animation-duration: 2s;
+}
+
+.loader:after {
+    animation-duration: 4s;
+}
+
+@keyframes l24 {
+    100% {
+        transform: rotate(1turn)
+    }
+}
+
+
+

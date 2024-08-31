@@ -1,0 +1,66 @@
+<div class="w-6/12 mx-auto shadow p-5 mb-10 ">
+    <h1 class="text-2xl pt-10 main-color font-semibold">Login Now</h1>
+    <form class="pt-10 pb-10" [formGroup]="LoginForm" (ngSubmit)="submitLoginForm()">
+
+
+
+        <div>
+            <label for="">email : </label>
+            <input  [ngClass]="{
+                'is-valid': !LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched || LoginForm.get('email')?.dirty),
+                'is-invalid': LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched || LoginForm.get('email')?.dirty)
+            }" type="email" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(LoginForm.get('email')?.errors && (LoginForm.get('email')?.touched ||
+            LoginForm.get('email')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(LoginForm.get('email')?.getError('required')){
+                <p>Email is Required</p>
+                }
+                @else if(LoginForm.get('email')?.getError('email')){
+                <p>Enter Valid Email </p>
+                }
+            </div>
+            }
+        </div>
+
+        <div>
+            <label for="">password : </label>
+            <input  [ngClass]="{
+                'is-valid': !LoginForm.get('password')?.errors && (LoginForm.get('password')?.touched || LoginForm.get('password')?.dirty),
+                'is-invalid': LoginForm.get('password')?.errors && (LoginForm.get('password')?.touched || LoginForm.get('password')?.dirty)
+            }" type="password" id="password" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(LoginForm.get('password')?.errors && (LoginForm.get('password')?.touched ||
+            LoginForm.get('password')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(LoginForm.get('password')?.getError('required')){
+                <p>password is Required</p>
+                }
+                @else if(LoginForm.get('password')?.getError('pattern')){
+                <p>must be at least 6 chars</p>
+                }
+            </div>
+            }
+        </div>
+
+
+        <!--               [disabled]="LoginForm.invalid || isLoading"
+ -->
+        <div class="flex items-center justify-end gap-4 ">
+            <a routerLink="/forget" class="anchorLink">Forget Password</a>
+            <button type="submit" title="Enter data in Form For Enable Button" class="link-style  mt-5 mb-5">
+                @if(isLoading){
+                <span class="pr-1">Login</span>
+                <span><i class="fa fa-spinner fa-spin"></i></span>
+                }
+                @else{
+                <span>Login</span>
+                }
+            </button>
+        </div>
+
+
+    </form>
+
+</div>

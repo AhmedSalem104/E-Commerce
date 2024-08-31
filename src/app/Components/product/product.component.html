@@ -1,0 +1,48 @@
+<div class="main relative ">
+    <div class="container mx-auto Coin   pt-5 pb-5  ">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+            <!-- Card 1 -->
+            @for(product of ProductsList ;track $index){
+            <div class="product cr  rounded-lg  shadow-[0px_0px_5px_2px_#48bb78]" >
+                <div [routerLink]="['/ProductDetails',product._id]">
+                    <img class="w-full h-52 object-cover rounded-t-lg" [src]="product.images[0]" alt="Product Image">
+                    <div class="p-2">
+                        <div class="mb-4">
+                            <h2 class="text-l font-bold main-color">{{product.category?.name}}</h2>
+                            <p class="text-gray-600 mt-2">{{product?.title?.split(" ")?.splice(0,2)?.join(" ")}}.</p>
+                        </div>
+
+                        <div class="RatingAndPrice mt-5 flex items-center justify-between w-full px-2  ">
+                            <span class="main-color text-l font-bold ">{{product?.price}} <span
+                                    class="text-gray-900">EGP</span></span>
+                            <div class="flex items-center">
+                                @for(num of [1,2,3,4,5].slice(0,product?.ratingsAverage) ; track $index ){
+                                <i class="fas fa-star text-yellow-500"></i>
+                                }
+                                @if(product.ratingsAverage % 1 !== 0){
+                                <i class="fa-solid fa-star-half-stroke  text-yellow-500"></i>
+
+                                }
+                                <span class=" text-l font-semibold ">{{product?.ratingsAverage}}</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="p-1">
+                    <button (click)="addToCart(product._id)" class="btn-addToCard link-style-btn-footer px-5 py-2 w-full ">Add to cart</button>
+                </div>
+            </div>
+            }
+           
+        </div>
+     
+
+    </div>
+   <!--  <div id="loading-container" [class]="loadingClass">
+        <div class="loading ">
+            <div class="flex justify-center items-center w-full h-full"> <span class="loader "></span></div>
+        </div>
+    </div> -->
+</div>
+

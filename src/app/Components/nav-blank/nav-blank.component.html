@@ -1,0 +1,273 @@
+<!-- app.component.html -->
+<nav class="fixed w-full top-0 z-10 bg-gray-100 text-white shadow-lg p-4">
+    <div class="container mx-auto flex justify-between items-center">
+        <!-- Logo -->
+        <div class="text-white font-bold text-xl"> <a routerLink="login">
+                <img class="h-8 w-8" src="./assets/images/freshcart-logo.svg" class="w-full" alt="Your Company">
+            </a>
+        </div>
+
+        <!-- Left Links -->
+        <div class="hidden md:flex space-x-4 me-3">
+
+            <a class="block py-2   text-1xl text-gray-900 " routerLink="home" routerLinkActive="link-style">
+                {{"navbar.Home" | translate}}
+            </a>
+
+            <a class="block py-2   text-1xl text-gray-900" routerLink="brands" routerLinkActive="link-style">
+                {{"navbar.Brands" | translate}}
+            </a>
+            <a class="block py-2   text-1xl text-gray-900" routerLink="categories" routerLinkActive="link-style">
+                {{"navbar.Categories" | translate}}
+            </a>
+            <a class="block py-2   text-1xl text-gray-900" routerLink="products" routerLinkActive="link-style">
+                {{"navbar.Products" | translate}}
+            </a>
+
+
+        </div>
+
+        <!-- Right Links -->
+        <div class="hidden md:flex space-x-4">
+
+
+            <i class="fa-solid fa-shield-heart"></i>
+
+
+            <div class="relative">
+                <button class="relative">
+                    <a routerLink="cart" routerLinkActive="link-style-Icon"
+                        class="block py-2  cursor-pointer  text-2xl ">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </a>
+                    <span
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {{ cartItemCount() }}
+                    </span>
+                </button>
+            </div>
+
+
+
+            <a class="block py-2  cursor-pointer   text-1xl text-gray-900 " aria-current="page">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+
+
+            <a class="block py-2  cursor-pointer    text-gray-900">
+
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+
+
+            <a class="block py-2  cursor-pointer    text-gray-900">
+                <i class="fa-brands fa-tiktok"></i>
+            </a>
+
+
+            <a class="block py-2  cursor-pointer    text-gray-900">
+                <i class="fa-brands fa-twitter"></i>
+            </a>
+
+
+            <a class="block py-2  cursor-pointer    text-gray-900">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+
+
+            <a class="block py-2  cursor-pointer    text-gray-900 hover:main-color">
+                <i class="fa-brands fa-youtube"></i>
+            </a>
+
+
+
+            <!--      <div class="relative inline-block text-left">
+                <div>
+                    <button (click)="toggleDropdown()"
+                        class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                        <i class="fas fa-globe mr-2"></i>
+                        {{"navbar.Lang" | translate}}
+                        <i class="fas fa-chevron-down ml-2"></i>
+                    </button>
+                </div>
+
+                <div
+                    class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                    @if(isOpen){
+                    <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+                        <a [ngClass]="{'bg-blue-400': _TranslateService.currentLang == 'en'}" (click)="cahnge('en')"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                            role="menuitem">En</a>
+                        <a [ngClass]="{'bg-blue-400': _TranslateService.currentLang == 'ar'}" (click)="cahnge('ar')"
+                            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                            role="menuitem">Ar</a>
+                    </div>
+                    }
+                </div>
+            </div> -->
+
+
+            <a [ngClass]="{'bg-gray-300': _TranslateService.currentLang == 'en'}" (click)="cahnge('en')"
+                class="block px-2 py-3 mx-0 text-sm font-semibold main-color  hover:bg-gray-300 rounded-lg cursor-pointer"
+                role="menuitem">En</a>
+            <a [ngClass]="{'bg-gray-300': _TranslateService.currentLang == 'ar'}" (click)="cahnge('ar')"
+                class="block px-2 py-3 mx-0 text-sm font-semibold main-color hover:bg-gray-300 rounded-lg cursor-pointer"
+                role="menuitem">Ar</a>
+
+
+            <a class="block py-2   text-1xl text-gray-900 cursor-pointer" (click)="_AuthService.logOut()">
+                {{"navbar.SignOut" | translate}}
+            </a>
+
+
+
+
+
+
+
+        </div>
+
+        <!-- Mobile Menu Button -->
+        <div class="md:hidden flex items-center">
+            <button (click)="toggleMenu()" class="text-gray-300 hover:text-white focus:outline-none focus:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7">
+                    </path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Links -->
+    <div #mobileMenu [ngClass]="{ 'hidden': isMenuHidden }" class="md:hidden">
+        <div class="px-2 pt-2 pb-3 space-y-1">
+
+
+            <a class="block py-2   text-1xl text-gray-900 " routerLink="home" routerLinkActive="link-style">
+                {{"navbar.Home" | translate}}
+            </a>
+
+
+            <a class="block py-2   text-1xl text-gray-900" routerLink="brands" routerLinkActive="link-style">
+                {{"navbar.Brands" | translate}}
+            </a>
+
+
+            <a class="block py-2   text-1xl text-gray-900" routerLink="categories" routerLinkActive="link-style">
+                {{"navbar.Categories" | translate}}
+            </a>
+
+
+
+            <a class="block py-2   text-1xl text-gray-900" routerLink="products" routerLinkActive="link-style">
+                {{"navbar.Products" | translate}}
+            </a>
+
+
+
+
+            <hr class="h-px my-2 bg-gray-300 border-0 dark:bg-gray-600">
+            <div class="flex justify-center gap-7">
+
+                <div class="relative">
+                    <button class="relative">
+                        <a routerLink="cart" routerLinkActive="link-style-Icon"
+                            class="block py-2  cursor-pointer  text-2xl ">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                        <span
+                            class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                            {{ cartItemCount }}
+                        </span>
+                    </button>
+                </div>
+
+
+
+                <a class="block py-2  cursor-pointer    text-1xl text-gray-900 " aria-current="page">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+
+
+                <a class="block py-2  cursor-pointer     text-gray-900">
+
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+
+
+                <a class="block py-2  cursor-pointer     text-gray-900">
+                    <i class="fa-brands fa-tiktok"></i>
+                </a>
+
+
+                <a class="block py-2  cursor-pointer     text-gray-900">
+                    <i class="fa-brands fa-twitter"></i>
+                </a>
+
+
+                <a class="block py-2  cursor-pointer     text-gray-900">
+                    <i class="fa-brands fa-linkedin"></i>
+                </a>
+
+
+                <a class="block py-2  cursor-pointer     text-gray-900">
+                    <i class="fa-brands fa-youtube"></i>
+                </a>
+
+
+                <a [ngClass]="{'bg-gray-300': _TranslateService.currentLang == 'en'}" (click)="cahnge('en')"
+                    class="block px-2 py-3 mx-0 text-sm font-semibold main-color  hover:bg-gray-300 rounded-lg cursor-pointer"
+                    role="menuitem">En</a>
+                <a [ngClass]="{'bg-gray-300': _TranslateService.currentLang == 'ar'}" (click)="cahnge('ar')"
+                    class="block px-2 py-3 mx-0 text-sm font-semibold main-color hover:bg-gray-300 rounded-lg cursor-pointer"
+                    role="menuitem">Ar</a>
+
+
+                <!--      <div class="relative inline-block text-left">
+                    <div>
+                        <button (click)="toggleDropdown()"
+                            class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none">
+                           <div class="flex justify-between">
+                            <i class="fas fa-globe mr-2"></i>
+                            <span> {{"navbar.Lang" | translate}}</span>
+                            <i class="fas fa-chevron-down ml-2"></i>
+                           </div>
+                        </button>
+                    </div>
+
+                    <div
+                        class="origin-top-right absolute right-0 mt-2 w-28 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5">
+                        @if(isOpen){
+                        <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="dropdownButton">
+                            <a [ngClass]="{'bg-blue-400': _TranslateService.currentLang == 'en'}" (click)="cahnge('en')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                role="menuitem">En</a>
+                            <a [ngClass]="{'bg-blue-400': _TranslateService.currentLang == 'ar'}" (click)="cahnge('ar')"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer"
+                                role="menuitem">Ar</a>
+                        </div>
+                        }
+                    </div>
+                </div>
+ -->
+
+            </div>
+            <hr class="h-px my-2 bg-gray-300 border-0 dark:bg-gray-600">
+
+
+
+
+
+
+
+            <div routerLink="cart" routerLinkActive="link-style" class="flex justify-center gap-7">
+
+                <a class="block py-2   cursor-pointer  text-1xl text-gray-900" (click)="_AuthService.logOut()">
+                    {{"navbar.SignOut" | translate}}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</nav>

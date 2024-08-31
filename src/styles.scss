@@ -1,1 +1,185 @@
-/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Encode+Sans+Expanded:wght@300&display=swap');
+
+:root {
+ 
+    --main-color: #00ad0a;
+    --main-font: "Encode Sans Expanded";
+    --light-color: #f0f3f2;
+    --shadow: rgba(145, 158, 171, 0.2) 0px 2px 4px -1px,
+        rgba(145, 158, 171, 0.14) 0px 4px 5px 0px,
+        rgba(145, 158, 171, 0.12) 0px 1px 10px 0px;
+    --font-family: "Encode Sans Expanded", sans-serif;
+    --rating-color: #ffc908;
+    --NotActiveColor:#adadad;
+    --dark-color: #181818;
+
+}
+
+body {
+    font-family: var(--main-font);
+}
+
+
+.link-style {
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: white;
+    padding: 8px;
+}
+
+.link-style-Icon {
+   
+    border-radius:50%;
+    color:var(--main-color);
+   
+    
+}
+
+.link-style-btn-footer {
+    background-color: var(--main-color);
+    border-radius: 5px;
+    color: white;
+
+}
+
+.my-swal-popup {
+    height: 250px;
+    /* تخصيص الارتفاع (مثلاً 300 بكسل) */
+}
+
+.main-color {
+    color: var(--main-color);
+}
+
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.main-color {
+    color: var(--main-color);
+
+}
+
+
+.nav-link {
+    transition: unset !important;
+}
+
+.active-link {
+    background-color: var(--main-color) !important;
+    color: var(--light-color) !important;
+    border-radius: 5px;
+    
+}
+.not-active-link {
+
+ 
+    background-color: var(--NotActiveColor) !important;
+    color: var(--dark-color) !important;
+    border-radius: 5px;
+
+   
+}
+
+.rating-color {
+    color: var(--rating-color);
+}
+
+.cr {
+    cursor: pointer;
+}
+
+a,
+a:hover {
+    color: black;
+    text-decoration: none;
+}
+
+.product {
+    border-radius: 5px;
+    border: solid 1px var(--main-color);
+    transition: box-shadow 0.5s;
+    overflow: hidden;
+}
+
+.product:hover {
+    box-shadow: 0 0 10px #11bd1168;
+}
+
+.font-sm {
+    font-size: 12px;
+}
+
+.text-main {
+    color: var(--main-color);
+}
+
+.bg-main {
+    background-color: var(--main-color) !important;
+}
+
+.bg-main-light {
+    background-color: var(--light-color) !important;
+}
+
+.btn-main {
+    background-color: var(--main-color);
+    padding: 7px 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+
+.btn-main:disabled {
+    cursor: not-allowed;
+    background-color: #ccc;
+}
+
+.btn-main:disabled:hover {
+    background-color: #ccc;
+}
+
+.btn-main:hover {
+    background-color: #11bd11;
+}
+
+.shadow {
+    box-shadow: var(--shadow);
+}
+
+
+.anchorLink{
+    color: rgb(0, 0, 218);
+}
+
+
+
+.is-valid {
+    border-color: var(--main-color);
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+  }
+  
+  .is-invalid {
+    border-color: red;
+    padding-right: calc(1.5em + .75rem);
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right calc(.375em + .1875rem) center;
+    background-size: calc(.75em + .375rem) calc(.75em + .375rem)
+    
+  }

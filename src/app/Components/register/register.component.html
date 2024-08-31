@@ -1,0 +1,122 @@
+<div class="w-6/12 mx-auto shadow p-5 mb-10 ">
+    <h1 class="text-2xl pt-10 main-color font-semibold">Register Now</h1>
+    <form class="pt-10 pb-10" [formGroup]="RegisterForm" (ngSubmit)="submitRegisterForm()">
+
+        <div>
+            <label for="">name : </label>
+            <input [ngClass]="{
+                'is-valid': !RegisterForm.get('name')?.errors && (RegisterForm.get('name')?.touched || RegisterForm.get('name')?.dirty),
+                'is-invalid': RegisterForm.get('name')?.errors && (RegisterForm.get('name')?.touched || RegisterForm.get('name')?.dirty)
+            }" type="text" id="name" formControlName="name"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(RegisterForm.get('name')?.errors && (RegisterForm.get('name')?.touched ||
+            RegisterForm.get('name')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(RegisterForm.get('name')?.getError('required')){
+                <p>name is requierd</p>
+                }
+                @else if (RegisterForm.get('name')?.getError('minlength')){
+                <p>Name Should be more than or equal 3 chars</p>
+                }
+                @else if (RegisterForm.get('name')?.getError('maxlength')){
+                <p>Name Should be less than or equal 20 chars </p>
+                }
+            </div>
+            }
+        </div>
+        <div>
+            <label for="">email : </label>
+            <input [ngClass]="{
+                'is-valid': !RegisterForm.get('email')?.errors && (RegisterForm.get('email')?.touched || RegisterForm.get('email')?.dirty),
+                'is-invalid': RegisterForm.get('email')?.errors && (RegisterForm.get('email')?.touched || RegisterForm.get('email')?.dirty)
+            }" type="email" id="email" formControlName="email"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(RegisterForm.get('email')?.errors && (RegisterForm.get('email')?.touched ||
+            RegisterForm.get('email')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(RegisterForm.get('email')?.getError('required')){
+                <p>Email is Required</p>
+                }
+                @else if(RegisterForm.get('email')?.getError('email')){
+                <p>Enter Valid Email </p>
+                }
+            </div>
+            }
+        </div>
+        <div>
+            <label for="">phone : </label>
+            <input [ngClass]="{
+                'is-valid': !RegisterForm.get('phone')?.errors && (RegisterForm.get('phone')?.touched || RegisterForm.get('phone')?.dirty),
+                'is-invalid': RegisterForm.get('phone')?.errors && (RegisterForm.get('phone')?.touched || RegisterForm.get('phone')?.dirty)
+            }" type="tel" id="phone" formControlName="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(RegisterForm.get('phone')?.errors && (RegisterForm.get('phone')?.touched ||
+            RegisterForm.get('phone')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(RegisterForm.get('phone')?.getError('required')){
+                <p>phone is Required</p>
+                }
+                @else if(RegisterForm.get('phone')?.getError('pattern')){
+                <p>accept only egypt phone numbers</p>
+
+                }
+            </div>
+            }
+        </div>
+
+        <div>
+            <label for="">password : </label>
+            <input [ngClass]="{
+                'is-valid': !RegisterForm.get('password')?.errors && (RegisterForm.get('password')?.touched || RegisterForm.get('password')?.dirty),
+                'is-invalid': RegisterForm.get('password')?.errors && (RegisterForm.get('password')?.touched || RegisterForm.get('password')?.dirty)
+            }" type="password" id="password" formControlName="password"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(RegisterForm.get('password')?.errors && (RegisterForm.get('password')?.touched ||
+            RegisterForm.get('password')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(RegisterForm.get('password')?.getError('required')){
+                <p>password is Required</p>
+                }
+                @else if(RegisterForm.get('password')?.getError('pattern')){
+                <p>must be at least 6 chars</p>
+                }
+            </div>
+            }
+        </div>
+        <div>
+            <label for="">rePassword : </label>
+            <input [ngClass]="{
+                'is-valid': !RegisterForm.get('rePassword')?.errors && (RegisterForm.get('rePassword')?.touched || RegisterForm.get('rePassword')?.dirty),
+                'is-invalid': RegisterForm.get('rePassword')?.errors && (RegisterForm.get('rePassword')?.touched || RegisterForm.get('rePassword')?.dirty)
+            }" type="password" id="rePassword" formControlName="rePassword"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(RegisterForm?.getError('mismatch') && (RegisterForm.get('rePassword')?.touched ||
+            RegisterForm.get('rePassword')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+
+
+                <p>Password confirmation is incorrect</p>
+
+            </div>
+            }
+
+        </div>
+
+
+        <!--               [disabled]="RegisterForm.invalid || isLoading"
+ -->
+
+        <button type="submit" title="Enter data in Form For Enable Button" class="link-style ms-auto block mt-5 mb-5">
+            @if(isLoading){
+            <span class="pr-1">Register</span>
+            <span><i class="fa fa-spinner fa-spin"></i></span>
+            }
+            @else{
+            <span>Register</span>
+            }
+        </button>
+
+
+    </form>
+
+</div>

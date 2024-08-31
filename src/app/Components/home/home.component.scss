@@ -1,0 +1,90 @@
+.product {
+    border-radius: 5px;
+    border: solid 1px var(--main-color);
+    transition: box-shadow 0.5s;
+    overflow: hidden;
+}
+
+.product:hover {
+    box-shadow: 0 0 10px #11bd1168;
+}
+
+.loading {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(109, 109, 109, 0);
+    justify-items: center;
+    align-items: center;
+    z-index: 999
+}
+
+.main {
+    min-height: 620px;
+}
+
+
+/* HTML: <div class="loader"></div> */
+.loader {
+    width: 50px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 8px solid #0000;
+    border-right-color: #00ad0a;
+    position: relative;
+    animation: l24 1s infinite linear;
+}
+
+.loader:before,
+.loader:after {
+    content: "";
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: inherit;
+    animation: inherit;
+    animation-duration: 2s;
+}
+
+.loader:after {
+    animation-duration: 4s;
+}
+
+@keyframes l24 {
+    100% {
+        transform: rotate(1turn)
+    }
+}
+
+
+
+.product:hover .btn-addToCard {
+    transform: translateY(-5px);
+
+
+}
+
+
+.btn-addToCard {
+    transition: 0.5s;
+    transform: translateY(120%);
+
+}
+
+.main-slider .image {
+    width: 100%;
+    height: 450px;
+}
+
+.right-image img {
+    width: 100%;
+    height: 225px
+}
+
+.right-image {
+   
+    height: 450px;
+}
+
+
+
+  

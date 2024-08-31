@@ -1,0 +1,131 @@
+@if(ProductDetails){
+<div class="container mx-auto p-6">
+  <div class="shadow-[0px_0px_4px_1px_#a0aec0]  rounded">
+    <div class="flex flex-col md:flex-row">
+      <!-- العمود الأول -->
+      <div class="flex-none  w-full  md:w-4/12 p-4">
+        <div class="main-image  h-full ">
+          @if(mainSrcImage == ''){
+  
+          <img #mainImage [src]="ProductDetails.data.images[0]" alt="Product Image"
+            class="w-full h-full object-cover border border-gray-300 rounded-lg">
+          }
+          @else{
+          <img #mainImage [src]="mainSrcImage" alt="Product Image"
+            class="w-full h-full object-cover border border-gray-300 rounded-lg">
+          }
+  
+        </div>
+      </div>
+  
+      <!-- العمود الثاني -->
+  
+  
+      <div>
+        <hr class="h-px my-2 bg-gray-400 border-0 dark:bg-gray-700">
+      </div>
+  
+      <div class="flex-1  flex flex-col">
+  
+        <!-- الجزء السفلي: Carousel للصور -->
+        <div class=" p-2 flex-1 order-first md:order-2">
+  
+  
+          <div class="grid grid-cols-1 ">
+  
+            <!--    @for(img of ProductDetailsImages ; track $index){
+              <img [src]="img" alt="Product Image" class="sup-image w-full h-full object-cover border border-gray-300 rounded-lg">
+            } -->
+  
+  
+            <owl-carousel-o [options]="customOptionsMain">
+  
+              @for(img of ProductDetailsImages ; track $index){
+              <ng-template carouselSlide>
+                <div>
+                  <img #sliderImage (click)="getSrc(img)" [src]="img" alt="Product Image Details"
+                    class="sup-image w-full h-48 object-cover border border-gray-300 rounded-lg">
+                </div>
+              </ng-template>
+              }
+            </owl-carousel-o>
+          </div>
+  
+  
+  
+  
+  
+        </div>
+  
+        <!-- الجزء العلوي: معلومات المنتج -->
+        <div class=" p-4 flex-1 order-last md:order-1 mb-5 ">
+  
+  
+          <h1 class="text-3xl font-bold mb-4"> {{ProductDetails.data.title.split(" ").splice(0,5).join(" ")}}</h1>
+  
+          <!-- وصف المنتج -->
+          <p class="text-gray-700 mb-6">
+            {{ProductDetails.data.description}}
+          </p>
+  
+          <!-- سعر المنتج -->
+  
+          <div class="RatingAndPrice mt-5 flex items-center justify-between w-full ">
+            <span class="main-color text-xl font-bold "> {{ProductDetails.data.category.name}}</span>
+  
+          </div>
+  
+  
+          <div class="RatingAndPrice mt-5 flex items-center justify-between w-full bg-gray-100  ">
+            <span class="main-color text-l font-bold "> {{ProductDetails.data.price}}<span class="text-gray-900">
+                EGP</span></span>
+            <div class="flex items-center">
+
+              @for(num of [1,2,3,4,5].slice(0,ProductDetails.data.ratingsAverage) ; track $index ){
+                <i class="fas fa-star text-yellow-500"></i>
+                }
+                @if(ProductDetails.data.ratingsAverage % 1 !== 0){
+                <i class="fa-solid fa-star-half-stroke  text-yellow-500"></i>
+
+                }
+                <span class=" text-l font-semibold ">{{ProductDetails.data.ratingsAverage}}</span>
+
+
+            <!--   <i class="fas fa-star text-yellow-500 mr-2"></i>
+              <span class=" text-l font-semibold mr-2"> {{ProductDetails.data.ratingsAverage}}</span> -->
+            </div>
+          </div>
+          <!-- زر إضافة إلى السلة -->
+          <button (click)="addToCart(ProductDetails.data._id)" class="btn-main py-2 px-4 mt-5 ">
+            Add to Cart
+          </button>
+  
+  
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}

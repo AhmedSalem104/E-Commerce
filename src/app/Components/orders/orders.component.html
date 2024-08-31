@@ -1,0 +1,107 @@
+<div class="w-6/12 mx-auto shadow p-5 mb-10 mt-10">
+    <h1 class="text-2xl pt-10 main-color font-semibold">ChekOut </h1>
+    <form class="pt-10 pb-10" [formGroup]="OrdersForm" (ngSubmit)="openPaymentPopup()" >
+
+
+
+        <div>
+            <label for="details">Details : </label>
+            <textarea [ngClass]="{
+                'is-valid': !OrdersForm.get('details')?.errors && (OrdersForm.get('details')?.touched || OrdersForm.get('details')?.dirty),
+                'is-invalid': OrdersForm.get('details')?.errors && (OrdersForm.get('details')?.touched || OrdersForm.get('details')?.dirty)
+            }" type="details" id="details" formControlName="details"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                </textarea>
+            @if(OrdersForm.get('details')?.errors && (OrdersForm.get('details')?.touched ||
+            OrdersForm.get('details')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(OrdersForm.get('details')?.getError('required')){
+                <p>details is Required</p>
+                }
+
+            </div>
+            }
+        </div>
+
+        <div>
+            <label for="">phone : </label>
+            <input [ngClass]="{
+                'is-valid': !OrdersForm.get('phone')?.errors && (OrdersForm.get('phone')?.touched || OrdersForm.get('phone')?.dirty),
+                'is-invalid': OrdersForm.get('phone')?.errors && (OrdersForm.get('phone')?.touched || OrdersForm.get('phone')?.dirty)
+            }" type="phone" id="phone" formControlName="phone"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(OrdersForm.get('phone')?.errors && (OrdersForm.get('phone')?.touched ||
+            OrdersForm.get('phone')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(OrdersForm.get('phone')?.getError('required')){
+                <p>phone is Required</p>
+                }
+                @else if(OrdersForm.get('phone')?.getError('pattern')){
+                <p>accept only egypt phone numbers</p>
+                }
+            </div>
+            }
+        </div>
+
+        <div>
+            <label for="">city : </label>
+            <input [ngClass]="{
+                'is-valid': !OrdersForm.get('city')?.errors && (OrdersForm.get('city')?.touched || OrdersForm.get('city')?.dirty),
+                'is-invalid': OrdersForm.get('city')?.errors && (OrdersForm.get('city')?.touched || OrdersForm.get('city')?.dirty)
+            }" type="city" id="city" formControlName="city"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+            @if(OrdersForm.get('city')?.errors && (OrdersForm.get('city')?.touched ||
+            OrdersForm.get('city')?.dirty)){
+            <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
+                @if(OrdersForm.get('city')?.getError('required')){
+                <p>city is Required</p>
+                }
+                @else if(OrdersForm.get('city')?.getError('pattern')){
+                <p>must be enter valid city</p>
+                }
+            </div>
+            }
+        </div>
+
+        <div class="flex items-center justify-end gap-4 ">
+
+
+            <button type="submit"  class="link-style mt-5 mb-5 px-4 py-2 rounded">
+                @if(isLoading){
+                    <span class="pr-1">Payment</span>
+                    <span><i class="fa fa-spinner fa-spin"></i></span>
+                    }
+                    @else{
+                    <span>Payment</span>
+                    }
+                  
+              </button>
+
+
+<!-- 
+
+            <button (click)="submitOrdersCredit()" type="submit" title="Enter data in Form For Enable Button" class="link-style  mt-5 mb-5">
+                @if(isLoadingCredit){
+                <span class="pr-1">Credit</span>
+                <span><i class="fa fa-spinner fa-spin"></i></span>
+                }
+                @else{
+                <span>Credit</span>
+                }
+            </button>
+            <button (click)="submitOrdersCash()" type="submit" title="Enter data in Form For Enable Button" class="link-style  mt-5 mb-5">
+                @if(isLoadingCash){
+                <span class="pr-1">Cash</span>
+                <span><i class="fa fa-spinner fa-spin"></i></span>
+                }
+                @else{
+                <span>Cash</span>
+                }
+            </button> -->
+        </div>
+
+
+
+    </form>
+
+</div>
