@@ -6,6 +6,7 @@ import { CartService } from '../../Core/services/Cart/cart.service';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { log } from 'console';
 import { MytranslateService } from '../../Core/services/translate/mytranslate.service';
+import { WishlistService } from '../../Core/services/Wishlist/wishlist.service';
 
 @Component({
   selector: 'app-nav-blank',
@@ -25,12 +26,14 @@ export class NavBlankComponent implements OnInit {
 
 
   cartItemCount:Signal<number> = computed(()=> this._CartService.CartCount())
+  wishListItemCount:Signal<number> = computed(()=> this._WishlistService.wishListCount())
 
   CurrentCount: number | string = ""
   public readonly _AuthService = inject(AuthService)
   public readonly _CartService = inject(CartService)
   public readonly _MytranslateService = inject(MytranslateService)
   public readonly _TranslateService = inject(TranslateService)
+  public readonly _WishlistService = inject(WishlistService)
 
   isMenuHidden = true;
 
@@ -41,6 +44,7 @@ export class NavBlankComponent implements OnInit {
 
   ngOnInit(): void {
     this.getLoggedUserCart()
+    this.GetLoggedUserWishlist()
   }
 
 
@@ -54,6 +58,16 @@ export class NavBlankComponent implements OnInit {
 
   }
 
+
+  GetLoggedUserWishlist() {
+    this._WishlistService.GetLoggedUserWishlist().subscribe({
+      next: res => {
+       this._WishlistService.wishListCount.set(res.count)
+      },
+    })
+
+
+  }
   cahnge(lang: string): void {
     this.toggleDropdown()
     this._MytranslateService.changeLang(lang)

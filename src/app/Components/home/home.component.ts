@@ -14,6 +14,7 @@ import { CartService } from '../../Core/services/Cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { BrandServiceService } from '../../Core/services/Brand/brand-service.service';
 import { Brand } from '../../Core/interfaces/brand/brand';
+import { WishlistService } from '../../Core/services/Wishlist/wishlist.service';
 
 
 @Component({
@@ -123,6 +124,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _CartService = inject(CartService)
   private readonly _ToastrService = inject(ToastrService)
   private readonly _BrandService = inject(BrandServiceService)
+  private readonly _WishlistService = inject(WishlistService)
 
 
   ngOnInit(): void {

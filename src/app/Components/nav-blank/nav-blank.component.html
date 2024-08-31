@@ -31,7 +31,20 @@
         <div class="hidden md:flex space-x-4">
 
 
-            <i class="fa-solid fa-shield-heart"></i>
+
+            <div class="relative">
+                <button class="relative">
+                    <a routerLink="wishList" routerLinkActive="link-style-Icon"
+                        class="block py-2  cursor-pointer  text-2xl ">
+                        <i class="fa-solid fa-shield-heart"></i>
+                    </a>
+                    <span
+                        class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                        {{ wishListItemCount() }}
+                    </span>
+                </button>
+            </div>
+
 
 
             <div class="relative">
@@ -169,6 +182,20 @@
 
             <hr class="h-px my-2 bg-gray-300 border-0 dark:bg-gray-600">
             <div class="flex justify-center gap-7">
+
+                <div class="relative">
+                    <button class="relative">
+                        <a routerLink="wishList" routerLinkActive="link-style-Icon"
+                            class="block py-2  cursor-pointer  text-2xl ">
+                            <i class="fa-solid fa-shield-heart"></i>
+                        </a>
+                        <span
+                            class="absolute -top-2 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                            {{ wishListItemCount() }}
+                        </span>
+                    </button>
+                </div>
+
 
                 <div class="relative">
                     <button class="relative">
