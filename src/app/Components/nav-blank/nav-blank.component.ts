@@ -47,7 +47,15 @@ export class NavBlankComponent implements OnInit {
     this.GetLoggedUserWishlist()
   }
 
+  GetLoggedUserWishlist() {
+    this._WishlistService.GetLoggedUserWishlist().subscribe({
+      next: res => {
+       this._WishlistService.wishListCount.set(res.count)
+      },
+    })
 
+
+  }
   getLoggedUserCart() {
     this._CartService.getLoggedUserCart().subscribe({
       next: res => {
@@ -59,15 +67,7 @@ export class NavBlankComponent implements OnInit {
   }
 
 
-  GetLoggedUserWishlist() {
-    this._WishlistService.GetLoggedUserWishlist().subscribe({
-      next: res => {
-       this._WishlistService.wishListCount.set(res.count)
-      },
-    })
-
-
-  }
+ 
   cahnge(lang: string): void {
     this.toggleDropdown()
     this._MytranslateService.changeLang(lang)

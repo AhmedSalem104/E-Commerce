@@ -29,7 +29,16 @@
 
                     </div>
                 </div>
-                <div class="p-1">
+                <div class="p-1 text-end">
+                    <div (click)="addToWishList(product._id)">
+                        <button class="text-end px-3 mb-2  object-contain">
+
+                            <i class="fa-solid fa-heart text-3xl" [ngClass]="getIconClass(product._id)" >
+                            </i>
+
+                        </button>
+                    </div>
+
                     <button (click)="addToCart(product._id)" class="btn-addToCard link-style-btn-footer px-5 py-2 w-full ">Add to cart</button>
                 </div>
             </div>

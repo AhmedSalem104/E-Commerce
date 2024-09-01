@@ -41,12 +41,4 @@ export class CartService {
     return this._HttpClient.delete<GetcartObj>(`${Enviroment.baseUrl}/api/v1/cart`,
     )
   }
-
-  /*  private cartItems = new BehaviorSubject<number>(0);
-   cartItems$ = this.cartItems.asObservable();
- 
-   addToCart(Count:number) {
-      this.cartItems.next(Count);
-   }
-  */
 }

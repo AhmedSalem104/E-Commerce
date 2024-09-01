@@ -1,5 +1,5 @@
-import { isPlatformBrowser, NgClass, UpperCasePipe } from '@angular/common';
-import { Component, ElementRef, inject, Inject, OnDestroy, OnInit, PLATFORM_ID, signal, ViewChild, viewChild, WritableSignal } from '@angular/core';
+import { isPlatformBrowser, NgClass } from '@angular/common';
+import { Component, ElementRef, inject, OnDestroy, OnInit, PLATFORM_ID, signal, ViewChild, WritableSignal } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Product } from '../../Core/interfaces/Products/Products/GetAllProducts';
 import { ProductsService } from '../../Core/services/Product/products.service';
@@ -25,6 +25,9 @@ import { WishlistService } from '../../Core/services/Wishlist/wishlist.service';
   styleUrl: './home.component.scss'
 })
 export class HomeComponent implements OnInit, OnDestroy {
+
+
+
 
   customOptionsMain: OwlOptions = {
     loop: true,
@@ -103,9 +106,10 @@ export class HomeComponent implements OnInit, OnDestroy {
     nav: true
   }
 
-  loveIconregular: string = "fa-regular fa-heart text-3xl font-extralight text-red-400"
-  loveIconsolid: string = "fa-solid fa-heart text-3xl  text-red-500"
-  isWishlisted: boolean = false;
+
+
+
+  isWishlisted: boolean = true;
   ProductloadingClass: string = "hidden"
   CategoryloadingClass: string = "hidden"
   BrandloadingClass: string = "hidden"
@@ -116,6 +120,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   StopApiCategory!: Subscription
   StopApiBrand!: Subscription
   searchText: string = ''
+  WishListArr!: any[]
+  x!: any[]
 
   private readonly Id: object = inject(PLATFORM_ID)
   private readonly _ProductsService = inject(ProductsService)
@@ -128,8 +134,10 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
+    this.WishListArr.filter((item) => {
 
-
+    })
     this.CategoryloadingClass = "flex"
     this.BrandloadingClass = "flex"
     this.ProductloadingClass = "flex"
@@ -143,12 +151,19 @@ export class HomeComponent implements OnInit, OnDestroy {
   getAllProducts() {
     this.StopApiProduct = this._ProductsService.getAllProducts().subscribe({
       next: (res) => {
-        this.ProductloadingClass = "hidden"
-        this.ProductsList.set(res.data)
-
+        this.ProductloadingClass = 'hidden';
+        this.ProductsList.set(res.data);
+        this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!) || [];
       },
-    })
+    });
   }
+
+  getIconClass(productId: string): string {
+
+    this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
+    return this.WishListArr.includes(productId) ? 'loveIconsolid' : 'loveIconregular';
+  }
+
   getAllGategories() {
     this.StopApiCategory = this._CategoriesService.getAllGategories().subscribe({
       next: (res) => {
@@ -170,18 +185,48 @@ export class HomeComponent implements OnInit, OnDestroy {
   progRouterToProductdetails(id: string) {
     this._Router.navigate(['/Products', id])
   }
+  addToWishList(Product_Id: string) {
+    this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
+    if (!this.WishListArr.includes(Product_Id)) {
+      //  فى حالة ان المنتج مش موجود فى  wishlist
+      this._WishlistService.AddProductToWishlist(Product_Id).subscribe({
+        next: res => {
+          this._WishlistService.wishListCount.set(res.data.length)
+          this.addToWishListSuccess(res.message)
+          localStorage.setItem('ProdcuctIdsWishListArr', JSON.stringify(res.data))
+          this.getIconClass(Product_Id)
+        },
+      })
+    }
+    else {
+      // المنتج موجود مسبقا فى wishList
+      this._WishlistService.RemoveProductFromWishlist(Product_Id).subscribe({
+        next: res => {
+          this._WishlistService.wishListCount.set(res.data.length)
+          this.removeFromWishListSuccess(res.message)
+          localStorage.setItem('ProdcuctIdsWishListArr', JSON.stringify(res.data))
+          this.getIconClass(Product_Id)
+        },
+      })
+    }
+  }
   addToCart(Product_Id: string) {
     //  here
     this._CartService.addProductToCart(Product_Id).subscribe({
       next: res => {
-        this.addToCartSuccess(res.message)
+        this.addToWishListSuccess(res.message)
         this._CartService.CartCount.set(res.numOfCartItems)
       },
     })
 
   }
-  addToCartSuccess(message: string) {
+  addToWishListSuccess(message: string) {
     this._ToastrService.success('', `${message}`, {
+      timeOut: 2000
+    })
+  }
+  removeFromWishListSuccess(message: string) {
+    this._ToastrService.info('', `${message}`, {
       timeOut: 2000
     })
   }

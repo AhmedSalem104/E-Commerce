@@ -79,6 +79,7 @@
                             alt="Product Image">
                         <div class="p-2">
                             <div class="mb-4">
+
                                 <h2 class="text-l font-bold main-color">{{product.category?.name}}</h2>
                                 <p class="text-gray-600 mt-2">{{product?.title?.split(" ")?.splice(0,2)?.join(" ")}}.
                                 </p>
@@ -101,20 +102,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-1">
+
+                <div class="p-1 text-end ">
+
+                    <div (click)="addToWishList(product._id)">
+                        <button class="text-end px-3 mb-2  object-contain">
+
+                            <i class="fa-solid fa-heart text-3xl" [ngClass]="getIconClass(product._id)" >
+                            </i>
+
+                        </button>
+                    </div>
+
                     <button (click)="addToCart(product._id)"
                         class="btn-addToCard link-style-btn-footer px-5 py-2 w-full ">Add to cart</button>
 
+
+
                 </div>
 
-                <div (click)="toggleWishlist()" class="absolute bottom-28 right-4">
-                    <i class="fa-solid fa-heart text-3xl" 
-                    [ngClass]="{' text-red-500': isWishlisted,
-                                ' text-gray-400': !isWishlisted}">
-                    </i> 
 
-                  
-                </div>
+
+
             </div>
             }
 
