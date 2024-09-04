@@ -5,7 +5,11 @@
             @for(product of ProductsList ;track $index){
             <div class="product cr  rounded-lg  shadow-[0px_0px_5px_2px_#48bb78]" >
                 <div [routerLink]="['/ProductDetails',product._id]">
-                    <img class="w-full h-52 object-cover rounded-t-lg" [src]="product.images[0]" alt="Product Image">
+                    <div class="w-full h-48 flex items-center justify-center bg-gray-100">
+                        <img class="max-w-full max-h-full object-contain" [src]="product.images[0]" alt="Product Image">
+                      </div> 
+
+                  <!--   <img class="w-full h-52 object-cover rounded-t-lg" [src]="product.images[0]" alt="Product Image"> -->
                     <div class="p-2">
                         <div class="mb-4">
                             <h2 class="text-l font-bold main-color">{{product.category?.name}}</h2>

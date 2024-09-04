@@ -82,7 +82,6 @@ export class RegisterComponent {
         this.isLoading = false
       },
       error: (err: HttpErrorResponse) => {
-        this.showError(err.error.message)
         this.isLoading = false
 
       },
@@ -96,10 +95,5 @@ export class RegisterComponent {
       positionClass: 'toast-top-center',
     });
   }
-  showError(x: string) {
-    this._ToastrService.error('', `${x}`, {
-      timeOut: 4000,
-      positionClass: 'toast-top-center',
-    });
-  }
+ 
 }

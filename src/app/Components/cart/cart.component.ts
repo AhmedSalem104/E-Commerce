@@ -15,6 +15,7 @@ import { RouterLink } from '@angular/router';
 export class CartComponent implements OnInit, OnDestroy {
 
   data: WritableSignal<Data> = signal({} as Data)
+  ItemCount: WritableSignal<number> = signal(0)
   StopApi!: Subscription
   loadingCountClass: WritableSignal<string> = signal('hidden')
   cartEmpty: WritableSignal<boolean> = signal(true)
@@ -29,12 +30,12 @@ export class CartComponent implements OnInit, OnDestroy {
     this.StopApi = this._CartService.getLoggedUserCart().subscribe({
       next: res => {
         if (res.numOfCartItems == 0) {
+          this.ItemCount.set(0)
           this.cartEmpty.set(true)
           this.clearCart.set(true)
-          this.data.set(res.data)
         }
         else {
-          /* this._CartService.addToCart(res.numOfCartItems) */
+          this.ItemCount.set(res.numOfCartItems)
           this.cartEmpty.set(false)
           this.clearCart.set(false)
           this.data.set(res.data)
@@ -51,13 +52,11 @@ export class CartComponent implements OnInit, OnDestroy {
     this.StopApi = this._CartService.UpdateCartProductQuantity(product_Id, Count.toString()).subscribe({
       next: res => {
         this.loadingCountClass.set('hidden')
-
         this.data.set(res.data)
-      },
-      error: err => {
-        console.log(err);
+        this.ItemCount.set(res.numOfCartItems)
 
-      }
+      },
+    
     })
 
   }
@@ -68,6 +67,8 @@ export class CartComponent implements OnInit, OnDestroy {
         this._CartService.CartCount.set(res.numOfCartItems)
         this.loadingCountClass.set('hidden')
         this.data.set(res.data)
+        this.ItemCount.set(res.numOfCartItems)
+
       },
       error: err => {
         console.log(err);
@@ -79,6 +80,8 @@ export class CartComponent implements OnInit, OnDestroy {
       next: res => {
         this.data.set(res.data)
         this._CartService.CartCount.set(0)
+        this.ItemCount.set(res.numOfCartItems)
+
       },
       error: err => {
         console.log(err);

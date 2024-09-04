@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgClass } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
 
 @Component({
   selector: 'app-login',
@@ -55,8 +56,8 @@ export class LoginComponent {
       this.fetchApi()
     }
     else {
-      this.LoginForm.setErrors({ mismatch: true })
       this.LoginForm.markAllAsTouched()
+      this.isLoading = false
     }
   }
   fetchApi() {
@@ -70,15 +71,13 @@ export class LoginComponent {
             this._Router.navigate(['/home'])
           }, 1500);
         }
-        console.log(res);
+       
         this.isLoading = false
       },
-      error: (err: HttpErrorResponse) => {
-        this.showError(err.error.message)
-  
+      error:()=>{
         this.isLoading = false
-
-      },
+      }
+    
     })
   }
 
@@ -88,10 +87,5 @@ export class LoginComponent {
       positionClass: 'toast-top-center',
     });
   }
-  showError(x: string) {
-    this._ToastrService.error('', `${x}`, {
-      timeOut: 4000,
-      positionClass: 'toast-top-center',
-    });
-  }
+  
 }

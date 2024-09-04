@@ -120,6 +120,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   StopApiCategory!: Subscription
   StopApiBrand!: Subscription
   searchText: string = ''
+
   WishListArr!: any[]
   x!: any[]
 
@@ -135,9 +136,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
-    this.WishListArr.filter((item) => {
-
-    })
     this.CategoryloadingClass = "flex"
     this.BrandloadingClass = "flex"
     this.ProductloadingClass = "flex"
@@ -154,6 +152,9 @@ export class HomeComponent implements OnInit, OnDestroy {
         this.ProductloadingClass = 'hidden';
         this.ProductsList.set(res.data);
         this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!) || [];
+       
+
+        
       },
     });
   }

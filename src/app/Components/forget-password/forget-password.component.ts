@@ -60,7 +60,7 @@ export class ForgetPasswordComponent {
 
       },
       error: (err) => {
-        this.showError(err.error.message)
+      
         this.isLoading = false
       }
     })
@@ -82,7 +82,7 @@ export class ForgetPasswordComponent {
 
       },
       error: (err) => {
-        this.showError(err.error.message);
+        
         this.isLoading = false
       }
     })
@@ -101,7 +101,7 @@ export class ForgetPasswordComponent {
         this._Router.navigate(['/home'])
       },
       error: (err) => {
-        this.showError(err.error.message)
+      
         this.isLoading = false
       }
     })
@@ -120,11 +120,6 @@ export class ForgetPasswordComponent {
       positionClass: 'toast-top-center',
     });
   }
-  showError(x: string) {
-    this._ToastrService.error('', `${x}`, {
-      timeOut: 1000,
-      positionClass: 'toast-top-center',
-    });
-  }
+ 
 
 }

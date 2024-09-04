@@ -75,8 +75,10 @@
             <div class="product cr bg-white shadow-lg rounded-lg relative">
                 <div [routerLink]="['/ProductDetails',product._id]">
                     <div class="w-full">
-                        <img class="w-full h-52 object-cover rounded-t-lg" [src]="product.images[0]"
-                            alt="Product Image">
+                         <div class="w-full h-48 flex items-center justify-center bg-gray-100">
+                        <img class="max-w-full max-h-full object-contain" [src]="product.images[0]" alt="Product Image">
+                      </div> 
+                  
                         <div class="p-2">
                             <div class="mb-4">
 
@@ -105,7 +107,16 @@
 
                 <div class="p-1 text-end ">
 
-                    <div (click)="addToWishList(product._id)">
+                    <div (click)="addToWishList(product._id)" >
+                       <!--  <div class="relative inline-block group  w-full">
+                            <button class="text-end px-3 mb-2 object-contain">
+                              <i class="fa-solid fa-heart text-4xl" [ngClass]="getIconClass(product._id)"></i>
+                            </button>
+                            <p class="absolute left-full top-1/2 font-semibold  mb-8 transform -translate-y-1/2 ml-2 text-red-600  opacity-0 group-hover:opacity-100 group-hover:left-1 transition-all duration-300">
+                              Add to Wishlist
+                            </p>
+                          </div> -->
+                          
                         <button class="text-end px-3 mb-2  object-contain">
 
                             <i class="fa-solid fa-heart text-4xl " [ngClass]="getIconClass(product._id)" >
