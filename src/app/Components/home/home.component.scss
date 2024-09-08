@@ -58,7 +58,7 @@
 
 
 .product:hover .btn-addToCard {
-    transform: translateY(-5px);
+    transform: translateY(-3px);
 
 
 }
@@ -66,7 +66,7 @@
 
 .btn-addToCard {
     transition: 0.5s;
-    transform: translateY(120%);
+    transform: translateY(180%);
 
 }
 
@@ -86,13 +86,12 @@
 }
 
 
-
-
-
 .loveIconregular {
-    color:rgb(219, 219, 219);
+    color:rgb(173, 173, 173);
 }
 
 .loveIconsolid {
-    color: red;
+    color: var(--main-color);
+    transition: .4s;
+    transform: scale(1.1);
 }

@@ -44,7 +44,7 @@ export class RegisterComponent {
     name: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
     email: [null, [Validators.required, Validators.email]],
     password: [null, [Validators.required, Validators.pattern(/^\w{6,}$/)]],
-    rePassword: [null],
+    rePassword: [null,Validators.required],
     phone: [null, [Validators.required, Validators.pattern(/^01[0125][0-9]{8}$/)]]
   }, { validators: [this.checkRepasswordMatch] })
 

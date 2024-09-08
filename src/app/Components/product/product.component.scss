@@ -72,9 +72,11 @@
 
 
 .loveIconregular {
-    color:rgb(219, 219, 219);
+    color:rgb(173, 173, 173);
 }
 
 .loveIconsolid {
-    color: red;
+    color: var(--main-color);
+    transition: .4s;
+    transform: scale(1.1);
 }

@@ -46,6 +46,7 @@ export class WishListComponent implements OnInit, OnDestroy {
     this._WishlistService.RemoveProductFromWishlist(Id).subscribe({
       next: res => {
          localStorage.setItem('ProdcuctIdsWishListArr',JSON.stringify(res.data))
+         this._WishlistService.wishListCount.set(res.count)
         this.getLoggedUserWishlist()
       }
     })

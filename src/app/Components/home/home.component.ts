@@ -26,7 +26,8 @@ import { WishlistService } from '../../Core/services/Wishlist/wishlist.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
 
-
+  currentPage: number = 1
+  totalPages!: number
 
 
   customOptionsMain: OwlOptions = {
@@ -106,9 +107,6 @@ export class HomeComponent implements OnInit, OnDestroy {
     nav: true
   }
 
-
-
-
   isWishlisted: boolean = true;
   ProductloadingClass: string = "hidden"
   CategoryloadingClass: string = "hidden"
@@ -122,7 +120,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   searchText: string = ''
 
   WishListArr!: any[]
-  x!: any[]
+  x!: any[] 
 
   private readonly Id: object = inject(PLATFORM_ID)
   private readonly _ProductsService = inject(ProductsService)
@@ -132,7 +130,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   private readonly _ToastrService = inject(ToastrService)
   private readonly _BrandService = inject(BrandServiceService)
   private readonly _WishlistService = inject(WishlistService)
-
 
   ngOnInit(): void {
     this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
@@ -151,20 +148,15 @@ export class HomeComponent implements OnInit, OnDestroy {
       next: (res) => {
         this.ProductloadingClass = 'hidden';
         this.ProductsList.set(res.data);
+        this.totalPages = res.metadata.numberOfPages
         this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!) || [];
-       
-
-        
       },
     });
   }
-
   getIconClass(productId: string): string {
-
     this.WishListArr = JSON.parse(localStorage.getItem('ProdcuctIdsWishListArr')!)
     return this.WishListArr.includes(productId) ? 'loveIconsolid' : 'loveIconregular';
   }
-
   getAllGategories() {
     this.StopApiCategory = this._CategoriesService.getAllGategories().subscribe({
       next: (res) => {
@@ -237,9 +229,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     })
   }
   toggleWishlist() {
-    console.log(this.isWishlisted);
     this.isWishlisted = !this.isWishlisted;
-    console.log(this.isWishlisted);
+  }
+  changePage(currentPage: number) {
+    this._ProductsService.getAllProductsPagination(currentPage).subscribe({
+      next:(res)=>{
+        this.ProductsList.set(res.data)
+      }
+    })
   }
   ngOnDestroy(): void {
     this.StopApiBrand?.unsubscribe()

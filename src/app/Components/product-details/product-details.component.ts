@@ -39,6 +39,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
     touchDrag: true,
     pullDrag: true,
     autoplay: true,
+    rtl: true,
     margin: 5,
     autoplayTimeout: 6000,
     autoplayHoverPause: true,

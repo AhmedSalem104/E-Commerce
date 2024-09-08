@@ -93,9 +93,13 @@
             @if(RegisterForm?.getError('mismatch') && (RegisterForm.get('rePassword')?.touched ||
             RegisterForm.get('rePassword')?.dirty)){
             <div class="bg-red-200  p-2 mt-2 mb-3 rounded">
-
-
+                @if(RegisterForm.get('rePassword')?.getError('required')){
+                <p>password is Required</p>
+                }
+                @else if(RegisterForm.get('password')?.getError('mismatch')){
                 <p>Password confirmation is incorrect</p>
+                }
+
 
             </div>
             }

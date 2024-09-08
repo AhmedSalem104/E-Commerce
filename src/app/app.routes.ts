@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { NotfoundComponent } from './Components/notfound/notfound.component';
 import { BlankLayoutComponent } from './layout/blank-layout/blank-layout.component';
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { authGuard } from './Core/gards/auth.guard';
