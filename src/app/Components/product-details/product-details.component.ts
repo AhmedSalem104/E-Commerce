@@ -1,9 +1,10 @@
 import { Subscription } from 'rxjs';
-import { Component, ElementRef, inject, OnDestroy, OnInit, PLATFORM_ID, ViewChild, viewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, ElementRef, inject, OnDestroy, OnInit, PLATFORM_ID, signal, ViewChild, viewChild, WritableSignal } from '@angular/core';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { GetSpecificProduct } from '../../Core/interfaces/Products/Products/GetSpecificProduct';
 import { ProductsService } from '../../Core/services/Product/products.service';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { Data, GetcartObj } from '../../Core/interfaces/Cart/GetLoggedUserCart';
 import { ToastrService } from 'ngx-toastr';
 import { CartService } from '../../Core/services/Cart/cart.service';
 
@@ -11,19 +12,23 @@ import { CartService } from '../../Core/services/Cart/cart.service';
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CarouselModule],
+  imports: [CarouselModule, RouterLink],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.scss'
 })
 export class ProductDetailsComponent implements OnInit, OnDestroy {
 
 
+
   private readonly Id: object = inject(PLATFORM_ID)
   private readonly _Router = inject(Router)
   private readonly _CartService = inject(CartService)
   private readonly _ToastrService = inject(ToastrService)
+
+  data: WritableSignal<Data> = signal({} as Data)
+  StopApi!: Subscription
   productId!: string | null;
-  ProductDetails!: GetSpecificProduct | null 
+  ProductDetails!: GetSpecificProduct | null
   ProductDetailsImages!: any
   stopApi!: Subscription
   mainSrcImage: string = ''
@@ -65,13 +70,13 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
   constructor(private _ActivatedRoute: ActivatedRoute, private _ProductsService: ProductsService) { }
   ngOnInit(): void {
+    this.getLoggedUserCart()
     this.ProductDetailsloadingClass = "flex"
     this._ActivatedRoute.paramMap.subscribe({
       next: (param) => {
         this.goProductDetails(param.get('id'))
       }
     })
-
   }
   goProductDetails(ProductId: string | null) {
     this.stopApi = this._ProductsService.getSpecificProduct(ProductId).subscribe({
@@ -80,20 +85,28 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
         this.ProductDetails = res
         this.ProductDetailsImages = res.data.images
       },
-      
+
     })
 
+  }
+
+  getLoggedUserCart() {
+    this.StopApi = this._CartService.getLoggedUserCart().subscribe({
+      next: res => {
+        this.data.set(res.data)
+      },
+    })
   }
 
 
   addToCart(Product_Id: string) {
     this._CartService.addProductToCart(Product_Id).subscribe({
       next: res => {
-     this._CartService.CartCount.set(res.numOfCartItems)
+        this._CartService.CartCount.set(res.numOfCartItems)
         this.addToCartSuccess(res.message)
 
       },
-    
+
     })
 
   }

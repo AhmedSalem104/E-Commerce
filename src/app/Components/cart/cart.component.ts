@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, signal, WritableSignal } from '@angular/core';
 import { CartService } from '../../Core/services/Cart/cart.service';
-import { Data, GetcartObj } from '../../Core/interfaces/Cart/GetLoggedUserCart';
+import { Data } from '../../Core/interfaces/Cart/GetLoggedUserCart';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -54,7 +54,6 @@ export class CartComponent implements OnInit, OnDestroy {
         this.loadingCountClass.set('hidden')
         this.data.set(res.data)
         this.ItemCount.set(res.numOfCartItems)
-
       },
     
     })
