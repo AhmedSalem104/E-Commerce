@@ -16,7 +16,9 @@ export class ProductsService {
   getAllProducts(): Observable<Products> {
     return this._HttpClient.get<Products>(`${Enviroment.baseUrl}/api/v1/products`);
   }
-
+  getAllProductsPagination(currentPage:number): Observable<Products> {
+    return this._HttpClient.get<Products>(`${Enviroment.baseUrl}/api/v1/products?page=${currentPage}`);
+  }
   getSpecificProduct(Id:string|null): Observable<GetSpecificProduct> {
     return this._HttpClient.get<GetSpecificProduct>(`${Enviroment.baseUrl}/api/v1/products/${Id}`);
   }
