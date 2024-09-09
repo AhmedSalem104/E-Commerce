@@ -3,6 +3,7 @@ import { BlankLayoutComponent } from './layout/blank-layout/blank-layout.compone
 import { AuthLayoutComponent } from './layout/auth-layout/auth-layout.component';
 import { authGuard } from './Core/gards/auth.guard';
 import { loginGuard } from './Core/gards/login.guard';
+import { HomeComponent } from './Components/home/home.component';
 
 export const routes: Routes = [
     {
@@ -12,17 +13,17 @@ export const routes: Routes = [
             {
                 path: 'login',
                 loadComponent: () => import('./Components/login/login.component').then(m => m.LoginComponent),
-                 title: 'Login'
+                title: 'Login'
             },
             {
                 path: 'register',
                 loadComponent: () => import('./Components/register/register.component').then(m => m.RegisterComponent),
-                 title: 'Register'
+                title: 'Register'
             },
             {
                 path: 'forget',
                 loadComponent: () => import('./Components/forget-password/forget-password.component').then(m => m.ForgetPasswordComponent),
-                 title: 'Forget password'
+                title: 'Forget password'
             },
         ]
     },
@@ -32,13 +33,12 @@ export const routes: Routes = [
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             {
                 path: 'home',
-                loadComponent: () => import('./Components/home/home.component').then(m => m.HomeComponent),
-                 title: 'Home'
+                component: HomeComponent, pathMatch: 'full', title: 'Home'
             },
             {
                 path: 'products',
                 loadComponent: () => import('./Components/product/product.component').then(m => m.ProductComponent),
-                 title: 'Products'
+                title: 'Products'
             },
             {
                 path: 'ProductDetails/:id',
@@ -58,22 +58,22 @@ export const routes: Routes = [
             {
                 path: 'categories',
                 loadComponent: () => import('./Components/categories/categories.component').then(m => m.CategoriesComponent),
-                 title: 'Category'
+                title: 'Category'
             },
             {
                 path: 'cart',
                 loadComponent: () => import('./Components/cart/cart.component').then(m => m.CartComponent),
-                 title: 'Cart'
+                title: 'Cart'
             },
             {
                 path: 'wishList',
                 loadComponent: () => import('./Components/wish-list/wish-list.component').then(m => m.WishListComponent),
-                 title: 'WishList'
+                title: 'WishList'
             },
             {
                 path: 'brands',
                 loadComponent: () => import('./Components/brands/brands.component').then(m => m.BrandsComponent),
-                 title: 'Brands'
+                title: 'Brands'
             },
         ]
     },

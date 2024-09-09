@@ -1,0 +1,1 @@
+import{s as e,x as a}from"./chunk-XC3E7FJG.js";import{Z as o,ca as n}from"./chunk-Y44U2H2M.js";var f=(()=>{let t=class t{constructor(i){this._HttpClient=i}GetAllBrands(){return this._HttpClient.get(`${a.baseUrl}/api/v1/brands`)}};t.\u0275fac=function(s){return new(s||t)(n(e))},t.\u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"});let r=t;return r})();export{f as a};

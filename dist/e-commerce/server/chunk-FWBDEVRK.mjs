@@ -1,0 +1,2 @@
+import './polyfills.server.mjs';
+import{a}from"./chunk-KU5BKOKS.mjs";import{x as e}from"./chunk-24LQVYIO.mjs";import{T as o,Y as n}from"./chunk-3OXFT4D6.mjs";var f=(()=>{let t=class t{constructor(i){this._HttpClient=i}GetAllBrands(){return this._HttpClient.get(`${a.baseUrl}/api/v1/brands`)}};t.\u0275fac=function(s){return new(s||t)(n(e))},t.\u0275prov=o({token:t,factory:t.\u0275fac,providedIn:"root"});let r=t;return r})();export{f as a};
